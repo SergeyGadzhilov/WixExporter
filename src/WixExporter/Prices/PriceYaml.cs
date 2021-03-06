@@ -36,7 +36,7 @@ namespace WixExporter.Prices.Yaml
 
       public Dictionary<string, Offer> offers()
       {
-         Dictionary<string, Category> categories = this.categories();
+         
          Dictionary<string, Offer> offers = new Dictionary<string, Offer>();
          XmlNodeList xmlNodeList = mXml.GetElementsByTagName("offer");
 
@@ -47,7 +47,7 @@ namespace WixExporter.Prices.Yaml
             offer.IsAvailable = (xmlNode.Attributes["available"].InnerText != "false");
             offer.Price = GetValue(xmlNode.SelectSingleNode("price"));
             offer.CurrencyId = GetValue(xmlNode.SelectSingleNode("currencyId"));
-            offer.Category = categories[GetValue(xmlNode.SelectSingleNode("categoryId"))];
+            offer.Category = GetCategory(xmlNode);
             offer.Name = GetValue(xmlNode.SelectSingleNode("name"));
             offer.Model = GetValue(xmlNode.SelectSingleNode("model"));
             offer.Quantity = GetValue(xmlNode.SelectSingleNode("stock_quantity"));
@@ -71,6 +71,19 @@ namespace WixExporter.Prices.Yaml
          }
 
          return offers;
+      }
+
+      private Category GetCategory(XmlNode node)
+      {
+         Category category = new Category();
+         Dictionary<string, Category> categories = this.categories();
+         string key = GetValue(node.SelectSingleNode("categoryId"));
+         if (categories.ContainsKey(key))
+         {
+            category = categories[key];
+         }
+
+         return category;
       }
 
       private string GetValue(XmlNode node)

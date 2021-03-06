@@ -1,0 +1,3 @@
+*.suo
+/src/WixExporter/obj/*
+/src/WixExporter/bin/*
