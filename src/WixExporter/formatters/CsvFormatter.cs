@@ -65,20 +65,20 @@ namespace WixExporter.formatters
          var csvOffer = GetTemplate();
          csvOffer[0] = offer.Id;
          csvOffer[2] = offer.Name;
-         csvOffer[3] = FormatDescription(offer);
+         csvOffer[3] = offer.Description;
          csvOffer[4] = string.Join(";", offer.Pictures);
          csvOffer[6] = offer.Id;
          csvOffer[8] = offer.Price;
          csvOffer[13] = offer.Quantity;
+         csvOffer[33] = Properties.Settings.Default.ParamTitle;
+         csvOffer[34] = FormatCharacteristics(offer);
 
          return Format(csvOffer);
       }
 
-      private string FormatDescription(Offer offer)
+      private string FormatCharacteristics(Offer offer)
       {
-         List<string> description = new List<string>(){
-            offer.Description
-         };
+         List<string> description = new List<string>();
 
          foreach (var param in offer.Params)
          {
