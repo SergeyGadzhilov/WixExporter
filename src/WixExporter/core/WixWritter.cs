@@ -1,16 +1,16 @@
 ﻿using System.Text;
 using System.IO;
-
+using System.Collections.Generic;
 
 namespace WixExporter.core
 {
    class WixWritter
    {
-      private Price mPrice;
+      private List<Price> mPrices;
       private WixFormatter mFormatter;
-      public WixWritter(Price price, WixFormatter formatter)
+      public WixWritter(List<Price> prices, WixFormatter formatter)
       {
-         mPrice = price;
+         mPrices = prices;
          mFormatter = formatter;
       }
 
@@ -18,10 +18,15 @@ namespace WixExporter.core
       {
          StringBuilder data = new StringBuilder();
          data.AppendLine(mFormatter.Header());
-         foreach (var offer in mPrice.offers())
+
+         foreach (var price in mPrices)
          {
-            data.AppendLine(mFormatter.Offer(offer.Value));
+            foreach (var offer in price.offers())
+            {
+               data.AppendLine(mFormatter.Offer(offer.Value));
+            }
          }
+
          File.WriteAllText(path, data.ToString());
       }
    }

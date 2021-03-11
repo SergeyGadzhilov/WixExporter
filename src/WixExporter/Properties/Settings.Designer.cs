@@ -34,5 +34,21 @@ namespace WixExporter.Properties {
                 this["ParamTitle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>D:\sandboxes\Wix\Downloads\test.xml</string>
+  <string>D:\sandboxes\Wix\Downloads\test2.xml</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Sources {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Sources"]));
+            }
+            set {
+                this["Sources"] = value;
+            }
+        }
     }
 }
