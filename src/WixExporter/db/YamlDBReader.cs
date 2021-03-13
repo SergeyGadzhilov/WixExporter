@@ -1,26 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using WixExporter.core;
+using WixExporter.core.db;
 using System.Xml;
 
-namespace WixExporter.Prices.Yaml
+namespace WixExporter.db
 {
-   class PriceYaml : Price
+   class YamlDBReader : PriceDBReader
    {
-      private XmlDocument mXml = new XmlDocument();
-
-      public PriceYaml(string path)
+      private Price mPrice = new Price();
+      public YamlDBReader(string url)
       {
-         if (!String.IsNullOrWhiteSpace(path))
+         if (!String.IsNullOrWhiteSpace(url))
          {
-            mXml.Load(path);
+            try
+            {
+               XmlDocument Xml = new XmlDocument();
+               Xml.Load(url);
+               ReadCategories(Xml);
+               ReadOffers(Xml);
+            }
+            catch (System.Exception)
+            {
+            }
          }
       }
-
-      override public Dictionary<string, Category> categories()
+      public Price GetPrice()
       {
-         Dictionary<string, Category> categories = new Dictionary<string, Category>();
-         XmlNodeList xmlNodeList = mXml.GetElementsByTagName("category");
+         return mPrice;
+      }
+
+      private void ReadCategories(XmlDocument xml)
+      {
+         XmlNodeList xmlNodeList = xml.GetElementsByTagName("category");
 
          foreach (XmlNode xmlNode in xmlNodeList)
          {
@@ -28,21 +40,18 @@ namespace WixExporter.Prices.Yaml
             category.Id = xmlNode.Attributes["id"].Value;
             category.Name = xmlNode.InnerText;
 
-            categories.Add(category.Id, category);
+            mPrice.AddCategory(category);
          }
-
-         return categories;
       }
-      override public Dictionary<string, Offer> offers()
+
+      private void ReadOffers(XmlDocument xml)
       {
-         Dictionary<string, Offer> offers = new Dictionary<string, Offer>();
-         XmlNodeList xmlNodeList = mXml.GetElementsByTagName("offer");
+         XmlNodeList xmlNodeList = xml.GetElementsByTagName("offer");
 
          foreach (XmlNode xmlNode in xmlNodeList)
          {
             Offer offer = new Offer();
             offer.Id = xmlNode.Attributes["id"].Value;
-            offer.IsAvailable = (xmlNode.Attributes["available"].InnerText != "false");
             offer.Price = GetValue(xmlNode.SelectSingleNode("price"));
             offer.CurrencyId = GetValue(xmlNode.SelectSingleNode("currencyId"));
             offer.Category = GetCategory(xmlNode);
@@ -65,16 +74,13 @@ namespace WixExporter.Prices.Yaml
                offer.AddParam(item);
             }
 
-            offers.Add(offer.Id, offer);
+            mPrice.AddOffer(offer);
          }
-
-         return offers;
       }
-
       private Category GetCategory(XmlNode node)
       {
          Category category = new Category();
-         Dictionary<string, Category> categories = this.categories();
+         Dictionary<string, Category> categories = mPrice.categories();
          string key = GetValue(node.SelectSingleNode("categoryId"));
          if (categories.ContainsKey(key))
          {
@@ -87,7 +93,7 @@ namespace WixExporter.Prices.Yaml
       private string GetValue(XmlNode node)
       {
          string data = "";
-         
+
          if (node != null)
          {
             data = node.InnerText;

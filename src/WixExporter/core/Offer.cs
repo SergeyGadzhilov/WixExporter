@@ -9,7 +9,6 @@ namespace WixExporter.core
    class Offer
    {
       private string mId = "";
-      private bool mIsAvailable = false;
       private string mPrice = "";
       private string mCurrencyId = "";
       private Category mCategory = new Category();
@@ -21,8 +20,26 @@ namespace WixExporter.core
       private List<string> mPictures = new List<string>();
       private List<Param> mParams = new List<Param>();
 
+      public Offer()
+      {
+      }
+
+      public Offer(Offer offer)
+      {
+         Id = offer.Id;
+         Price = offer.Price;
+         CurrencyId = offer.CurrencyId;
+         Category = offer.Category;
+         Name = offer.Name;
+         Description = offer.Description;
+         Model = offer.Model;
+         Vendor = offer.Vendor;
+         Quantity = offer.Quantity;
+         Pictures = offer.Pictures;
+         Params = offer.Params;
+      }
+
       public string Id { get => mId; set => mId = value; }
-      public bool IsAvailable { get => mIsAvailable; set => mIsAvailable = value; }
       public string Price { get => mPrice; set => mPrice = value; }
       public string CurrencyId { get => mCurrencyId; set => mCurrencyId = value; }
       public Category Category { get => mCategory; set => mCategory = value; }

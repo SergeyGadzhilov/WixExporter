@@ -10,25 +10,32 @@ namespace WixExporter.core
    {
       private Dictionary<string, Category> mCategories = new Dictionary<string, Category>();
       private Dictionary<string, Offer> mOffers = new Dictionary<string, Offer>();
-      virtual public Dictionary<string, Category> categories()
+      public Dictionary<string, Category> categories()
       {
          return mCategories;
       }
-      virtual public Dictionary<string, Offer> offers()
+      public Dictionary<string, Offer> offers()
       {
          return mOffers;
       }
       public void AddCategory(Category category)
       {
-         if (!mCategories.ContainsKey(category.Id))
+         if (mCategories.ContainsKey(category.Id))
+         {
+            mCategories[category.Id] = category;
+         }
+         else
          {
             mCategories.Add(category.Id, category);
          }
       }
-
       public void AddOffer(Offer offer)
       {
-         if (!mOffers.ContainsKey(offer.Id))
+         if (mOffers.ContainsKey(offer.Id))
+         {
+            mOffers[offer.Id] = offer;
+         }
+         else
          {
             mOffers.Add(offer.Id, offer);
          }

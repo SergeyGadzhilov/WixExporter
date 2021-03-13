@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using WixExporter.Prices.Yaml;
 using WixExporter.core;
+using WixExporter.core.db;
+using WixExporter.db;
 using WixExporter.formatters;
 using System.Collections.Generic;
 
@@ -44,21 +45,31 @@ namespace WixExporter
 
       private void button_Update_Click(object sender, EventArgs e)
       {
+         const string DB_FILE = "db.xml";
+         PriceDB db = new PriceDB(new YamlDBReader(DB_FILE), new YamlDBWriter(DB_FILE));
+
          enableForm(false);
          List<Price> prices = GetPrices();
 
          WixWritter writter = new WixWritter(prices, new CsvFormatter());
          writter.write(textBox_Destination.Text + "\\wix.csv");
 
-         UpdateDB(prices);
+         ComparedPrice comparedPrice = new ComparedPrice(db.GetPrice(), prices);
+         foreach (var offer in comparedPrice.comparedOffers())
+         {
+            Console.WriteLine("Changed offer = " + offer.Key);
+            Console.WriteLine("Prev price = " + offer.Value.oldPrice);
+            Console.WriteLine("New price = " + offer.Value.Price);
+         }
+
+         UpdateDB(db, prices);
 
          MessageBox.Show("Done!");
          enableForm(true);
       }
 
-      private void UpdateDB(List<Price> prices)
+      private void UpdateDB(PriceDB db, List<Price> prices)
       {
-         PriceDB db = new PriceDB();
          foreach (var price in prices)
          {
             db.AddPrice(price);
@@ -72,7 +83,8 @@ namespace WixExporter
 
          foreach (var source in Properties.Settings.Default.Sources)
          {
-            prices.Add(new PriceYaml(source));
+            var reader = new YamlDBReader(source);
+            prices.Add(reader.GetPrice());
          }
 
          return prices;
