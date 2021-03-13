@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComparedPiceGridView.cs" />
     <Compile Include="core\Category.cs" />
     <Compile Include="core\ComparedPrice.cs" />
     <Compile Include="core\ComparedOffer.cs" />
