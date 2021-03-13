@@ -32,7 +32,7 @@ namespace WixExporter
          this.label_Destination = new System.Windows.Forms.Label();
          this.textBox_Destination = new System.Windows.Forms.TextBox();
          this.button_LookupDestination = new System.Windows.Forms.Button();
-         this.button_Convert = new System.Windows.Forms.Button();
+         this.button_Update = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // label_Destination
@@ -62,23 +62,23 @@ namespace WixExporter
          this.button_LookupDestination.UseVisualStyleBackColor = true;
          this.button_LookupDestination.Click += new System.EventHandler(this.button_LookupDestination_Click);
          // 
-         // button_Convert
+         // button_Update
          // 
-         this.button_Convert.Enabled = false;
-         this.button_Convert.Location = new System.Drawing.Point(438, 67);
-         this.button_Convert.Name = "button_Convert";
-         this.button_Convert.Size = new System.Drawing.Size(75, 31);
-         this.button_Convert.TabIndex = 6;
-         this.button_Convert.Text = "Convert";
-         this.button_Convert.UseVisualStyleBackColor = true;
-         this.button_Convert.Click += new System.EventHandler(this.button_Convert_Click);
+         this.button_Update.Enabled = false;
+         this.button_Update.Location = new System.Drawing.Point(438, 67);
+         this.button_Update.Name = "button_Update";
+         this.button_Update.Size = new System.Drawing.Size(75, 31);
+         this.button_Update.TabIndex = 6;
+         this.button_Update.Text = "Update";
+         this.button_Update.UseVisualStyleBackColor = true;
+         this.button_Update.Click += new System.EventHandler(this.button_Update_Click);
          // 
          // MainForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(537, 121);
-         this.Controls.Add(this.button_Convert);
+         this.Controls.Add(this.button_Update);
          this.Controls.Add(this.button_LookupDestination);
          this.Controls.Add(this.textBox_Destination);
          this.Controls.Add(this.label_Destination);
@@ -95,7 +95,7 @@ namespace WixExporter
       private System.Windows.Forms.Label label_Destination;
       private System.Windows.Forms.TextBox textBox_Destination;
       private System.Windows.Forms.Button button_LookupDestination;
-      private System.Windows.Forms.Button button_Convert;
+      private System.Windows.Forms.Button button_Update;
    }
 }
 

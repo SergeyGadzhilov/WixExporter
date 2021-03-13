@@ -27,7 +27,7 @@ namespace WixExporter
 
       private void updateControls()
       {
-         button_Convert.Enabled = (
+         button_Update.Enabled = (
             Directory.Exists(textBox_Destination.Text)
          );
       }
@@ -38,11 +38,11 @@ namespace WixExporter
 
       private void enableForm(bool enable)
       {
-         button_Convert.Enabled = enable;
+         button_Update.Enabled = enable;
          textBox_Destination.Enabled = enable;
       }
 
-      private void button_Convert_Click(object sender, EventArgs e)
+      private void button_Update_Click(object sender, EventArgs e)
       {
          enableForm(false);
          CsvFormatter formatter = new CsvFormatter();

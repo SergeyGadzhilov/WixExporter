@@ -36,7 +36,6 @@ namespace WixExporter.Prices.Yaml
 
       public Dictionary<string, Offer> offers()
       {
-         
          Dictionary<string, Offer> offers = new Dictionary<string, Offer>();
          XmlNodeList xmlNodeList = mXml.GetElementsByTagName("offer");
 
