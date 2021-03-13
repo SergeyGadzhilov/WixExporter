@@ -38,6 +38,8 @@ namespace WixExporter
          this.OldPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.NewPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.button_Save = new System.Windows.Forms.Button();
+         this.button_ExportSelected = new System.Windows.Forms.Button();
+         this.button_ExportAll = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.OffersGrid)).BeginInit();
          this.SuspendLayout();
          // 
@@ -70,7 +72,7 @@ namespace WixExporter
          // 
          // button_Update
          // 
-         this.button_Update.Location = new System.Drawing.Point(223, 282);
+         this.button_Update.Location = new System.Drawing.Point(95, 279);
          this.button_Update.Name = "button_Update";
          this.button_Update.Size = new System.Drawing.Size(75, 31);
          this.button_Update.TabIndex = 6;
@@ -125,7 +127,8 @@ namespace WixExporter
          // 
          // button_Save
          // 
-         this.button_Save.Location = new System.Drawing.Point(305, 282);
+         this.button_Save.Enabled = false;
+         this.button_Save.Location = new System.Drawing.Point(176, 279);
          this.button_Save.Name = "button_Save";
          this.button_Save.Size = new System.Drawing.Size(75, 31);
          this.button_Save.TabIndex = 8;
@@ -133,12 +136,36 @@ namespace WixExporter
          this.button_Save.UseVisualStyleBackColor = true;
          this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
          // 
+         // button_ExportSelected
+         // 
+         this.button_ExportSelected.Enabled = false;
+         this.button_ExportSelected.Location = new System.Drawing.Point(257, 279);
+         this.button_ExportSelected.Name = "button_ExportSelected";
+         this.button_ExportSelected.Size = new System.Drawing.Size(132, 31);
+         this.button_ExportSelected.TabIndex = 9;
+         this.button_ExportSelected.Text = "Export Selected";
+         this.button_ExportSelected.UseVisualStyleBackColor = true;
+         this.button_ExportSelected.Click += new System.EventHandler(this.button_Export_Click);
+         // 
+         // button_ExportAll
+         // 
+         this.button_ExportAll.Enabled = false;
+         this.button_ExportAll.Location = new System.Drawing.Point(396, 279);
+         this.button_ExportAll.Name = "button_ExportAll";
+         this.button_ExportAll.Size = new System.Drawing.Size(129, 31);
+         this.button_ExportAll.TabIndex = 10;
+         this.button_ExportAll.Text = "Export All";
+         this.button_ExportAll.UseVisualStyleBackColor = true;
+         this.button_ExportAll.Click += new System.EventHandler(this.button_ExportAll_Click);
+         // 
          // MainForm
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
          this.ClientSize = new System.Drawing.Size(537, 322);
+         this.Controls.Add(this.button_ExportAll);
+         this.Controls.Add(this.button_ExportSelected);
          this.Controls.Add(this.button_Save);
          this.Controls.Add(this.OffersGrid);
          this.Controls.Add(this.button_Update);
@@ -165,6 +192,8 @@ namespace WixExporter
       private System.Windows.Forms.DataGridViewTextBoxColumn OldPrice;
       private System.Windows.Forms.DataGridViewTextBoxColumn NewPrice;
       private System.Windows.Forms.Button button_Save;
+      private System.Windows.Forms.Button button_ExportSelected;
+      private System.Windows.Forms.Button button_ExportAll;
    }
 }
 

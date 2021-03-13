@@ -6,11 +6,17 @@ namespace WixExporter.core
 {
    class WixWritter
    {
-      private List<Price> mPrices;
+      private List<Price> mPrices = new List<Price>();
       private WixFormatter mFormatter;
       public WixWritter(List<Price> prices, WixFormatter formatter)
       {
          mPrices = prices;
+         mFormatter = formatter;
+      }
+
+      public WixWritter(Price price, WixFormatter formatter)
+      {
+         mPrices.Add(price);
          mFormatter = formatter;
       }
 

@@ -11,18 +11,37 @@ namespace WixExporter
 {
    class ComparedPiceGridView
    {
-      public ComparedPiceGridView(DataGridView view, ComparedPrice price)
+      private DataGridView mView = null;
+      public ComparedPiceGridView(DataGridView view)
       {
-         view.Rows.Clear();
+         mView = view;
+      }
+
+      public void SetData(ComparedPrice price)
+      {
+         mView.Rows.Clear();
          foreach (var offer in price.comparedOffers())
          {
             object[] data = {
-               offer.Key, 
-               offer.Value.oldPrice, 
+               offer.Key,
+               offer.Value.oldPrice,
                offer.Value.Price
             };
-            view.Rows.Add(data);
+
+            mView.Rows.Add(data);
          }
+      }
+
+      public List<string> GetSelected()
+      {
+         List<string> selection = new List<string>();
+         
+         foreach (DataGridViewRow row in mView.SelectedRows)
+         {
+            selection.Add(row.Cells["ID"].Value.ToString());
+         }
+
+         return selection;
       }
    }
 }

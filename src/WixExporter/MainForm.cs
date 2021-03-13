@@ -12,12 +12,13 @@ namespace WixExporter
    public partial class MainForm : Form
    {
       private const string DB_FILE = "db.xml";
-      private PriceDB mDB = new PriceDB(new YamlDBReader(DB_FILE), new YamlDBWriter(DB_FILE));
-      private List<Price> mPrices = new List<Price>();
+      private ComparedPrice mPrice = null;
+      ComparedPiceGridView mTable = null;
       public MainForm()
       {
          InitializeComponent();
-         mPrices = GetPrices();
+         mPrice = GetPrice();
+         mTable = new ComparedPiceGridView(OffersGrid);
       }
 
       private void button_LookupDestination_Click(object sender, EventArgs e)
@@ -32,7 +33,15 @@ namespace WixExporter
 
       private void updateControls()
       {
+         button_Save.Enabled = mPrice.comparedOffers().Count > 0;
+         button_ExportSelected.Enabled = (
+            Directory.Exists(textBox_Destination.Text) &&
+            button_Save.Enabled &&
+            mTable.GetSelected().Count > 0
+         );
+         button_ExportAll.Enabled = Directory.Exists(textBox_Destination.Text) && button_Save.Enabled;
       }
+
       private void textBox_Destination_TextChanged(object sender, EventArgs e)
       {
          updateControls();
@@ -40,6 +49,17 @@ namespace WixExporter
 
       private void enableForm(bool enable)
       {
+         if (enable)
+         {
+            updateControls();
+         }
+         else
+         {
+            button_Save.Enabled = enable;
+            button_ExportSelected.Enabled = enable;
+            button_ExportAll.Enabled = enable;
+         }
+
          button_Update.Enabled = enable;
          textBox_Destination.Enabled = enable;
       }
@@ -47,27 +67,17 @@ namespace WixExporter
       private void button_Update_Click(object sender, EventArgs e)
       {
          enableForm(false);
-
-         //WixWritter writter = new WixWritter(prices, new CsvFormatter());
-         //writter.write(textBox_Destination.Text + "\\wix.csv");
-
-         ComparedPrice comparedPrice = new ComparedPrice(mDB.GetPrice(), mPrices);
-         ComparedPiceGridView table = new ComparedPiceGridView(OffersGrid, comparedPrice);
+ 
+         mPrice = GetPrice();
+         mTable.SetData(mPrice);
 
          MessageBox.Show("Done!");
          enableForm(true);
       }
-      private void UpdateDB()
-      {
-         foreach (var price in mPrices)
-         {
-            mDB.AddPrice(price);
-         }
-         mDB.Save();
-      }
 
-      private List<Price> GetPrices()
+      private ComparedPrice GetPrice()
       {
+         var db = new YamlDBReader(DB_FILE);
          List<Price> prices = new List<Price>();
 
          foreach (var source in Properties.Settings.Default.Sources)
@@ -76,12 +86,50 @@ namespace WixExporter
             prices.Add(reader.GetPrice());
          }
 
-         return prices;
+         return new ComparedPrice(db.GetPrice(), prices);
       }
+
       private void button_Save_Click(object sender, EventArgs e)
       {
          enableForm(false);
-         UpdateDB();
+         var db = new YamlDBWriter(DB_FILE);
+         db.SavePrice(mPrice);
+         MessageBox.Show("Done!");
+         enableForm(true);
+      }
+
+      private void button_Export_Click(object sender, EventArgs e)
+      {
+         enableForm(false);
+
+         Price price = new Price();
+         var offers = mPrice.comparedOffers();
+
+         foreach (var offerID in mTable.GetSelected())
+         {
+            price.AddOffer(offers[offerID]);
+         }
+
+         WixWritter writter = new WixWritter(price, new CsvFormatter());
+         writter.write(textBox_Destination.Text + "\\wix.csv");
+
+         MessageBox.Show("Done!");
+         enableForm(true);
+      }
+
+      private void button_ExportAll_Click(object sender, EventArgs e)
+      {
+         enableForm(false);
+
+         Price price = new Price();
+         foreach (var offer in mPrice.comparedOffers())
+         {
+            price.AddOffer(offer.Value);
+         }
+
+         WixWritter writter = new WixWritter(price, new CsvFormatter());
+         writter.write(textBox_Destination.Text + "\\wix.csv");
+
          MessageBox.Show("Done!");
          enableForm(true);
       }
