@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="core\Category.cs" />
+    <Compile Include="core\PriceDB.cs" />
     <Compile Include="core\WixFormatter.cs" />
     <Compile Include="core\WixWritter.cs" />
     <Compile Include="core\Offer.cs" />

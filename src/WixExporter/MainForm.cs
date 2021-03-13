@@ -45,11 +45,25 @@ namespace WixExporter
       private void button_Update_Click(object sender, EventArgs e)
       {
          enableForm(false);
-         CsvFormatter formatter = new CsvFormatter();
-         WixWritter writter = new WixWritter(GetPrices(), formatter);
+         List<Price> prices = GetPrices();
+
+         WixWritter writter = new WixWritter(prices, new CsvFormatter());
          writter.write(textBox_Destination.Text + "\\wix.csv");
+
+         UpdateDB(prices);
+
          MessageBox.Show("Done!");
          enableForm(true);
+      }
+
+      private void UpdateDB(List<Price> prices)
+      {
+         PriceDB db = new PriceDB();
+         foreach (var price in prices)
+         {
+            db.AddPrice(price);
+         }
+         db.Save();
       }
 
       private List<Price> GetPrices()

@@ -17,7 +17,7 @@ namespace WixExporter.Prices.Yaml
          }
       }
 
-      public Dictionary<string, Category> categories()
+      override public Dictionary<string, Category> categories()
       {
          Dictionary<string, Category> categories = new Dictionary<string, Category>();
          XmlNodeList xmlNodeList = mXml.GetElementsByTagName("category");
@@ -33,8 +33,7 @@ namespace WixExporter.Prices.Yaml
 
          return categories;
       }
-
-      public Dictionary<string, Offer> offers()
+      override public Dictionary<string, Offer> offers()
       {
          Dictionary<string, Offer> offers = new Dictionary<string, Offer>();
          XmlNodeList xmlNodeList = mXml.GetElementsByTagName("offer");
