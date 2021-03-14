@@ -10,6 +10,10 @@ namespace WixExporter.core
    {
       private Price mOldPrice = new Price();
 
+      public ComparedPrice()
+      {
+      }
+
       public ComparedPrice(Price oldPrice, List<Price> prices, PriceFilter filter)
       {
          mOldPrice = oldPrice;

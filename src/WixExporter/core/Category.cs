@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WixExporter
 {
-   class Category
+   public class Category
    {
       private string mId = "";
       private string mName = "";

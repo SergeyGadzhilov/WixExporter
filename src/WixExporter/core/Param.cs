@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WixExporter.core
 {
-   class Param
+   public class Param
    {
       private string mName = "";
       private string mValue = "";

@@ -64,13 +64,13 @@ namespace WixExporter.formatters
       {
          var csvOffer = GetTemplate();
          csvOffer[0] = offer.Id;
-         csvOffer[2] = offer.Name;
-         csvOffer[3] = offer.Description;
+         csvOffer[2] = FormatString(offer.Name);
+         csvOffer[3] = FormatString(offer.Description);
          csvOffer[4] = string.Join(";", offer.Pictures);
          csvOffer[6] = offer.Id;
-         csvOffer[8] = offer.Price;
+         csvOffer[8] = FormatString(offer.Price);
          csvOffer[13] = offer.Quantity;
-         csvOffer[33] = Properties.Settings.Default.ParamTitle;
+         csvOffer[33] = FormatString(Properties.Settings.Default.ParamTitle);
          csvOffer[34] = FormatCharacteristics(offer);
 
          return Format(csvOffer);
@@ -85,7 +85,12 @@ namespace WixExporter.formatters
             description.Add(param.ToString());
          }
 
-         return "\"" + string.Join("<br>", description) + "\"";
+         return  FormatString(string.Join("<br>", description));
+      }
+
+      private string FormatString(string data)
+      {
+         return "\"" + data.Replace("\"", "\"\"") + "\"";
       }
 
       private string Format(List<string> data)

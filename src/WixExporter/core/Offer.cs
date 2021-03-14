@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WixExporter.core
 {
-   class Offer
+   public class Offer
    {
       private string mId = "";
       private string mPrice = "";

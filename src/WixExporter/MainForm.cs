@@ -12,12 +12,11 @@ namespace WixExporter
    public partial class MainForm : Form
    {
       private const string DB_FILE = "db.xml";
-      private ComparedPrice mPrice = null;
+      private ComparedPrice mPrice = new ComparedPrice();
       ComparedPiceGridView mTable = null;
       public MainForm()
       {
          InitializeComponent();
-         mPrice = GetPrice();
          mTable = new ComparedPiceGridView(OffersGrid);
       }
 
@@ -103,10 +102,12 @@ namespace WixExporter
          enableForm(false);
 
          Price price = new Price();
+         PriceValidatorDialog priceValidator = new PriceValidatorDialog();
          var offers = mPrice.comparedOffers();
 
          foreach (var offerID in mTable.GetSelected())
          {
+            priceValidator.ValidateOffer(offers[offerID]);
             price.AddOffer(offers[offerID]);
          }
 
@@ -122,8 +123,10 @@ namespace WixExporter
          enableForm(false);
 
          Price price = new Price();
+         PriceValidatorDialog priceValidator = new PriceValidatorDialog();
          foreach (var offer in mPrice.comparedOffers())
          {
+            priceValidator.ValidateOffer(offer.Value);
             price.AddOffer(offer.Value);
          }
 
