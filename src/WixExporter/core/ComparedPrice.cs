@@ -37,7 +37,8 @@ namespace WixExporter.core
          {
             if (oldOffers.ContainsKey(offer.Key))
             {
-               if (oldOffers[offer.Key].Price != offer.Value.Price)
+               if (oldOffers[offer.Key].Price != offer.Value.Price ||
+                   oldOffers[offer.Key].Quantity != offer.Value.Quantity)
                {
                   var comparedOffer = new ComparedOffer(oldOffers[offer.Key], offer.Value);
                   comparedOffers.Add(offer.Key, comparedOffer);

@@ -25,7 +25,9 @@ namespace WixExporter
             object[] data = {
                offer.Key,
                offer.Value.oldPrice,
-               offer.Value.Price
+               offer.Value.oldQuantity,
+               offer.Value.Price,
+               offer.Value.Quantity
             };
 
             mView.Rows.Add(data);

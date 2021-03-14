@@ -57,7 +57,7 @@ namespace WixExporter.db
             offer.Category = GetCategory(xmlNode);
             offer.Name = GetValue(xmlNode.SelectSingleNode("name"));
             offer.Model = GetValue(xmlNode.SelectSingleNode("model"));
-            offer.Quantity = GetValue(xmlNode.SelectSingleNode("stock_quantity"));
+            offer.Quantity = xmlNode.Attributes["instock"].Value;
             offer.Vendor = GetValue(xmlNode.SelectSingleNode("vendor"));
             offer.Description = GetValue(xmlNode.SelectSingleNode("description"));
 
