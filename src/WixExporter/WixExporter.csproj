@@ -53,6 +53,7 @@
     <Compile Include="core\db\PriceDB.cs" />
     <Compile Include="core\db\PriceDBReader.cs" />
     <Compile Include="core\db\PriceDBWriter.cs" />
+    <Compile Include="core\PriceFilter.cs" />
     <Compile Include="core\WixFormatter.cs" />
     <Compile Include="core\WixWritter.cs" />
     <Compile Include="core\Offer.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="core\Price.cs" />
     <Compile Include="db\YamlDBReader.cs" />
     <Compile Include="db\YamlDBWriter.cs" />
+    <Compile Include="filters\YamlPriceFilter.cs" />
     <Compile Include="formatters\CsvFormatter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

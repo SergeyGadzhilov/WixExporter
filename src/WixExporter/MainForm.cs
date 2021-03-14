@@ -2,9 +2,9 @@
 using System.IO;
 using System.Windows.Forms;
 using WixExporter.core;
-using WixExporter.core.db;
 using WixExporter.db;
 using WixExporter.formatters;
+using WixExporter.filters;
 using System.Collections.Generic;
 
 namespace WixExporter
@@ -86,7 +86,7 @@ namespace WixExporter
             prices.Add(reader.GetPrice());
          }
 
-         return new ComparedPrice(db.GetPrice(), prices);
+         return new ComparedPrice(db.GetPrice(), prices, new YamlPriceFilter("filter.xml"));
       }
 
       private void button_Save_Click(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace WixExporter.core
    {
       private Price mOldPrice = new Price();
 
-      public ComparedPrice(Price oldPrice, List<Price> prices)
+      public ComparedPrice(Price oldPrice, List<Price> prices, PriceFilter filter)
       {
          mOldPrice = oldPrice;
          foreach (var price in prices)
@@ -19,6 +19,12 @@ namespace WixExporter.core
             {
                AddOffer(offer.Value);
             }
+         }
+
+         if (filter != null)
+         {
+            filter.apply(this);
+            filter.apply(mOldPrice);
          }
       }
 
