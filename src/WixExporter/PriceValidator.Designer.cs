@@ -34,6 +34,7 @@ namespace WixExporter
          this.label_Reason = new System.Windows.Forms.Label();
          this.label_ID = new System.Windows.Forms.Label();
          this.textBox_ID = new System.Windows.Forms.TextBox();
+         this.button_Cut = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // textBox_Editor
@@ -88,11 +89,22 @@ namespace WixExporter
          this.textBox_ID.Size = new System.Drawing.Size(267, 22);
          this.textBox_ID.TabIndex = 4;
          // 
+         // button_Cut
+         // 
+         this.button_Cut.Location = new System.Drawing.Point(16, 473);
+         this.button_Cut.Name = "button_Cut";
+         this.button_Cut.Size = new System.Drawing.Size(75, 28);
+         this.button_Cut.TabIndex = 5;
+         this.button_Cut.Text = "Cut";
+         this.button_Cut.UseVisualStyleBackColor = true;
+         this.button_Cut.Click += new System.EventHandler(this.button_Cut_Click);
+         // 
          // PriceValidatorDialog
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(881, 516);
+         this.Controls.Add(this.button_Cut);
          this.Controls.Add(this.textBox_ID);
          this.Controls.Add(this.label_ID);
          this.Controls.Add(this.label_Reason);
@@ -102,6 +114,7 @@ namespace WixExporter
          this.MaximizeBox = false;
          this.MinimizeBox = false;
          this.Name = "PriceValidatorDialog";
+         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "PriceValidator";
          this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PriceValidatorDialog_KeyDown);
          this.ResumeLayout(false);
@@ -116,5 +129,6 @@ namespace WixExporter
       private System.Windows.Forms.Label label_Reason;
       private System.Windows.Forms.Label label_ID;
       private System.Windows.Forms.TextBox textBox_ID;
+      private System.Windows.Forms.Button button_Cut;
    }
 }

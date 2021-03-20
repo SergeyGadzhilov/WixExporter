@@ -74,5 +74,11 @@ namespace WixExporter
             button_OK_Click(sender, e);
          }
       }
+
+      private void button_Cut_Click(object sender, EventArgs e)
+      {
+         textBox_Editor.Text = textBox_Editor.Text.Substring(0, 80);
+         button_OK.Focus();
+      }
    }
 }
