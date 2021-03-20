@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WixExporter.core
 {
-   class Price
+   public class Price
    {
       private Dictionary<string, Category> mCategories = new Dictionary<string, Category>();
       private Dictionary<string, Offer> mOffers = new Dictionary<string, Offer>();

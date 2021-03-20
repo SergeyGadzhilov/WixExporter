@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace WixExporter.core
 {
-   interface PriceFilter
+   public interface PriceFilter
    {
       void apply(Price price);
+      void addOffer(Offer offer);
+      void Save();
    }
 }

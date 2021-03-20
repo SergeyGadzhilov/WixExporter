@@ -102,7 +102,7 @@ namespace WixExporter
          enableForm(false);
 
          Price price = new Price();
-         PriceValidatorDialog priceValidator = new PriceValidatorDialog();
+         PriceValidatorDialog priceValidator = new PriceValidatorDialog(mPrice.GetFilter());
          var offers = mPrice.comparedOffers();
 
          foreach (var offerID in mTable.GetSelected())
@@ -114,6 +114,8 @@ namespace WixExporter
          WixWritter writter = new WixWritter(price, new CsvFormatter());
          writter.write(textBox_Destination.Text + "\\wix.csv");
 
+         mPrice.ApplyFilter();
+
          MessageBox.Show("Done!");
          enableForm(true);
       }
@@ -123,7 +125,7 @@ namespace WixExporter
          enableForm(false);
 
          Price price = new Price();
-         PriceValidatorDialog priceValidator = new PriceValidatorDialog();
+         PriceValidatorDialog priceValidator = new PriceValidatorDialog(mPrice.GetFilter());
          foreach (var offer in mPrice.comparedOffers())
          {
             priceValidator.ValidateOffer(offer.Value);
@@ -132,6 +134,9 @@ namespace WixExporter
 
          WixWritter writter = new WixWritter(price, new CsvFormatter());
          writter.write(textBox_Destination.Text + "\\wix.csv");
+
+
+         mPrice.ApplyFilter();
 
          MessageBox.Show("Done!");
          enableForm(true);

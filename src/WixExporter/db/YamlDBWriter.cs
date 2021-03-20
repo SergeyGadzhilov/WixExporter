@@ -7,14 +7,19 @@ namespace WixExporter.db
 {
    class YamlDBWriter : PriceDBWriter
    {
-       private XmlWriter mWriter = null;
+      private XmlWriter mWriter = null;
 
       public YamlDBWriter(string url)
       {
          mWriter = XmlWriter.Create(url, new XmlWriterSettings { Indent = true });
       }
 
-      public void SavePrice(Price price)
+      public XmlWriter GetWriter()
+      {
+         return mWriter;
+      }
+
+      virtual public void SavePrice(Price price)
       {
         mWriter.WriteStartElement("shop");
 
@@ -24,7 +29,7 @@ namespace WixExporter.db
         mWriter.WriteEndElement();
         mWriter.Close();
       }
-      private void SaveCategories(Price price)
+      protected virtual void SaveCategories(Price price)
       {
          mWriter.WriteStartElement("categories");
          foreach (var category in price.categories())
@@ -37,8 +42,7 @@ namespace WixExporter.db
 
          mWriter.WriteEndElement();
       }
-
-      private void SaveOffers(Price price)
+      protected virtual void SaveOffers(Price price)
       {
          mWriter.WriteStartElement("offers");
          foreach (var offer in price.offers())

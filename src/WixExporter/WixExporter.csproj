@@ -62,6 +62,7 @@
     <Compile Include="db\YamlDBReader.cs" />
     <Compile Include="db\YamlDBWriter.cs" />
     <Compile Include="filters\YamlPriceFilter.cs" />
+    <Compile Include="filters\YamlPriceFilterWritter.cs" />
     <Compile Include="formatters\CsvFormatter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

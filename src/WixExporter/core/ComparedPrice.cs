@@ -8,6 +8,7 @@ namespace WixExporter.core
 {
    class ComparedPrice : Price
    {
+      private PriceFilter mFilter = null;
       private Price mOldPrice = new Price();
 
       public ComparedPrice()
@@ -16,6 +17,7 @@ namespace WixExporter.core
 
       public ComparedPrice(Price oldPrice, List<Price> prices, PriceFilter filter)
       {
+         mFilter = filter;
          mOldPrice = oldPrice;
          foreach (var price in prices)
          {
@@ -25,11 +27,21 @@ namespace WixExporter.core
             }
          }
 
-         if (filter != null)
+         ApplyFilter();
+      }
+
+      public void ApplyFilter()
+      {
+         if (mFilter != null)
          {
-            filter.apply(this);
-            filter.apply(mOldPrice);
+            mFilter.apply(this);
+            mFilter.apply(mOldPrice);
          }
+      }
+
+      public PriceFilter GetFilter()
+      {
+         return mFilter;
       }
 
       public Dictionary<string, ComparedOffer> comparedOffers()

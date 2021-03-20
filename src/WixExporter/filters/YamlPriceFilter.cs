@@ -10,11 +10,18 @@ namespace WixExporter.filters
 {
    class YamlPriceFilter : PriceFilter
    {
+      private string mUrl = "";
       private Price mFilterPrice = new Price();
       public YamlPriceFilter(string url)
       {
+         mUrl = url;
          var reader = new YamlDBReader(url);
          mFilterPrice = reader.GetPrice();
+      }
+
+      public void addOffer(Offer offer)
+      {
+         mFilterPrice.AddOffer(offer);
       }
 
       public void apply(Price price)
@@ -28,6 +35,12 @@ namespace WixExporter.filters
                offer.Value.Description = GetValue(offer.Value.Description, offersFilter[offer.Key].Description);
             }
          }
+      }
+
+      public void Save()
+      {
+         var writer = new YamlPriceFilterWritter(mUrl);
+         writer.SavePrice(mFilterPrice);
       }
 
       private string GetValue(string offer, string filter)

@@ -5,9 +5,19 @@ namespace WixExporter
 {
    public partial class PriceValidatorDialog : Form
    {
-      public PriceValidatorDialog()
+      private PriceFilter mFilter = null;
+      public PriceValidatorDialog(PriceFilter filter)
       {
          InitializeComponent();
+         mFilter = filter;
+      }
+
+      public void ValidatePrice(Price price)
+      {
+         foreach (var offer in price.offers())
+         {
+            ValidateOffer(offer.Value);
+         }
       }
 
       public void ValidateOffer(Offer offer)
@@ -26,6 +36,11 @@ namespace WixExporter
             {
                offer.Name = textBox_Editor.Text;
                label_Reason.Text = "";
+               if (mFilter != null)
+               {
+                  mFilter.addOffer(offer);
+                  mFilter.Save();
+               }
             }
             else
             {
