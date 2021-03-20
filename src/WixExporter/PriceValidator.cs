@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using WixExporter.core;
+using System;
 
 namespace WixExporter
 {
@@ -53,6 +54,25 @@ namespace WixExporter
       {
          DialogResult = DialogResult.OK;
          Close();
+      }
+
+      private void textBox_Editor_KeyDown(object sender, KeyEventArgs e)
+      {
+         if (e.KeyCode == Keys.Enter)
+         {
+            if (e.Modifiers != Keys.Shift)
+            {
+               button_OK_Click(sender, e);
+            }
+         }
+      }
+
+      private void PriceValidatorDialog_KeyDown(object sender, KeyEventArgs e)
+      {
+         if (e.KeyCode == Keys.Enter)
+         {
+            button_OK_Click(sender, e);
+         }
       }
    }
 }
