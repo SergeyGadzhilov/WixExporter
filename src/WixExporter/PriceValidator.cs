@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using WixExporter.core;
 using System;
+using System.Drawing;
 
 namespace WixExporter
 {
@@ -30,7 +31,7 @@ namespace WixExporter
       {
          while (string.IsNullOrEmpty(offer.Name) || offer.Name.Length > 80)
          {
-            label_Reason.Text = "Max length for name is 80 symbols!";
+            label_Reason.Text = "Max length for name is 80 symbols! \n Lenght: " + offer.Name.Length.ToString();
             textBox_ID.Text = offer.Id;
             textBox_Editor.Text = offer.Name;
             if (ShowDialog() == DialogResult.OK)
@@ -77,8 +78,25 @@ namespace WixExporter
 
       private void button_Cut_Click(object sender, EventArgs e)
       {
-         textBox_Editor.Text = textBox_Editor.Text.Substring(0, 80);
+         if (textBox_Editor.Text.Length > 80)
+         {
+            textBox_Editor.Text = textBox_Editor.Text.Substring(0, 80);
+         }
          button_OK.Focus();
+      }
+
+      private void textBox_Editor_TextChanged(object sender, EventArgs e)
+      {
+         if (textBox_Editor.Text.Length > 80)
+         {
+            label_Reason.ForeColor = Color.FromName("Red");
+            label_Reason.Text = "Max length for name is 80 symbols!\nLenght: " + textBox_Editor.Text.Length.ToString();
+         }
+         else
+         {
+            label_Reason.Text = "\nLenght: " + textBox_Editor.Text.Length.ToString();
+            label_Reason.ForeColor = Color.FromName("Balck");
+         }
       }
    }
 }

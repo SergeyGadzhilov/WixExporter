@@ -41,17 +41,18 @@ namespace WixExporter
          // 
          this.textBox_Editor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
          this.textBox_Editor.Location = new System.Drawing.Point(16, 114);
-         this.textBox_Editor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+         this.textBox_Editor.Margin = new System.Windows.Forms.Padding(4);
          this.textBox_Editor.Multiline = true;
          this.textBox_Editor.Name = "textBox_Editor";
          this.textBox_Editor.Size = new System.Drawing.Size(848, 339);
          this.textBox_Editor.TabIndex = 0;
+         this.textBox_Editor.TextChanged += new System.EventHandler(this.textBox_Editor_TextChanged);
          this.textBox_Editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Editor_KeyDown);
          // 
          // button_OK
          // 
          this.button_OK.Location = new System.Drawing.Point(765, 473);
-         this.button_OK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+         this.button_OK.Margin = new System.Windows.Forms.Padding(4);
          this.button_OK.Name = "button_OK";
          this.button_OK.Size = new System.Drawing.Size(100, 28);
          this.button_OK.TabIndex = 1;
@@ -64,7 +65,7 @@ namespace WixExporter
          this.label_Reason.AutoSize = true;
          this.label_Reason.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
          this.label_Reason.ForeColor = System.Drawing.Color.Red;
-         this.label_Reason.Location = new System.Drawing.Point(16, 82);
+         this.label_Reason.Location = new System.Drawing.Point(13, 50);
          this.label_Reason.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
          this.label_Reason.Name = "label_Reason";
          this.label_Reason.Size = new System.Drawing.Size(0, 28);
@@ -83,7 +84,7 @@ namespace WixExporter
          // textBox_ID
          // 
          this.textBox_ID.Location = new System.Drawing.Point(57, 16);
-         this.textBox_ID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+         this.textBox_ID.Margin = new System.Windows.Forms.Padding(4);
          this.textBox_ID.Name = "textBox_ID";
          this.textBox_ID.ReadOnly = true;
          this.textBox_ID.Size = new System.Drawing.Size(267, 22);
@@ -110,7 +111,7 @@ namespace WixExporter
          this.Controls.Add(this.label_Reason);
          this.Controls.Add(this.button_OK);
          this.Controls.Add(this.textBox_Editor);
-         this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+         this.Margin = new System.Windows.Forms.Padding(4);
          this.MaximizeBox = false;
          this.MinimizeBox = false;
          this.Name = "PriceValidatorDialog";
