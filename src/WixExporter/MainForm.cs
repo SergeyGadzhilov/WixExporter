@@ -6,6 +6,7 @@ using WixExporter.db;
 using WixExporter.formatters;
 using WixExporter.filters;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace WixExporter
 {
@@ -77,15 +78,23 @@ namespace WixExporter
       private ComparedPrice GetPrice()
       {
          var db = new YamlDBReader(DB_FILE);
+         List<Price> prices = readPrices();
+
+         return new ComparedPrice(db.GetPrice(), prices, new YamlPriceFilter("filter.xml"));
+      }
+
+      private List<Price> readPrices()
+      {
          List<Price> prices = new List<Price>();
 
          foreach (var source in Properties.Settings.Default.Sources)
          {
             var reader = new YamlDBReader(source);
             prices.Add(reader.GetPrice());
+            Thread.Sleep(Properties.Settings.Default.Delay);
          }
 
-         return new ComparedPrice(db.GetPrice(), prices, new YamlPriceFilter("filter.xml"));
+         return prices;
       }
 
       private void button_Save_Click(object sender, EventArgs e)

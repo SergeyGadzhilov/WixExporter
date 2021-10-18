@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using WixExporter.core;
 using WixExporter.core.db;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace WixExporter.db
 {
@@ -20,8 +21,9 @@ namespace WixExporter.db
                ReadCategories(Xml);
                ReadOffers(Xml);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+               MessageBox.Show("Cannot read url: " + url + ". Error message: " + ex.Message);
             }
          }
       }
