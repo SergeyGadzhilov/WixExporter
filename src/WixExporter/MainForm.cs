@@ -67,10 +67,15 @@ namespace WixExporter
       private void button_Update_Click(object sender, EventArgs e)
       {
          enableForm(false);
- 
-         mPrice = GetPrice();
-         mTable.SetData(mPrice);
 
+         this.progressBar1.Value = 0;
+         this.progressBar1.Visible = true;
+         mTable.Clear();
+         
+         mPrice = GetPrice();
+         this.progressBar1.Visible = false;
+         mTable.SetData(mPrice);
+         
          MessageBox.Show("Done!");
          enableForm(true);
       }
@@ -79,18 +84,21 @@ namespace WixExporter
       {
          var db = new YamlDBReader(DB_FILE);
          List<Price> prices = readPrices();
+         YamlPriceFilter filter = new YamlPriceFilter("filter.xml");
 
-         return new ComparedPrice(db.GetPrice(), prices, new YamlPriceFilter("filter.xml"));
+         return new ComparedPrice(db.GetPrice(), prices, filter);
       }
 
       private List<Price> readPrices()
       {
          List<Price> prices = new List<Price>();
-
+         this.progressBar1.Maximum = Properties.Settings.Default.Sources.Count;
+         this.progressBar1.Step = 1;
          foreach (var source in Properties.Settings.Default.Sources)
          {
             var reader = new YamlDBReader(source);
             prices.Add(reader.GetPrice());
+            this.progressBar1.PerformStep();
             Thread.Sleep(Properties.Settings.Default.Delay);
          }
 

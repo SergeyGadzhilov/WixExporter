@@ -53,13 +53,13 @@ namespace WixExporter.db
          foreach (XmlNode xmlNode in xmlNodeList)
          {
             Offer offer = new Offer();
-            offer.Id = xmlNode.Attributes["id"].Value;
+            offer.Id = GetValue(xmlNode.Attributes["id"]);
             offer.Price = GetValue(xmlNode.SelectSingleNode("price"));
             offer.CurrencyId = GetValue(xmlNode.SelectSingleNode("currencyId"));
             offer.Category = GetCategory(xmlNode);
             offer.Name = GetValue(xmlNode.SelectSingleNode("name"));
             offer.Model = GetValue(xmlNode.SelectSingleNode("model"));
-            offer.Quantity = xmlNode.Attributes["instock"].Value;
+            offer.Quantity = GetValue(xmlNode.Attributes["instock"]);
             offer.Vendor = GetValue(xmlNode.SelectSingleNode("vendor"));
             offer.Description = GetValue(xmlNode.SelectSingleNode("description"));
 
@@ -84,12 +84,24 @@ namespace WixExporter.db
          Category category = new Category();
          Dictionary<string, Category> categories = mPrice.categories();
          string key = GetValue(node.SelectSingleNode("categoryId"));
-         if (categories.ContainsKey(key))
+         if (!String.IsNullOrEmpty(key) && categories.ContainsKey(key))
          {
             category = categories[key];
          }
 
          return category;
+      }
+
+      private string GetValue(XmlAttribute attribute)
+      {
+         string data = "";
+
+         if (attribute != null)
+         {
+            data = attribute.Value;
+         }
+
+         return data;
       }
 
       private string GetValue(XmlNode node)

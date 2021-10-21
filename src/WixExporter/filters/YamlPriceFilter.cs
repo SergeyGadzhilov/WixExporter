@@ -15,7 +15,7 @@ namespace WixExporter.filters
       public YamlPriceFilter(string url)
       {
          mUrl = url;
-         var reader = new YamlDBReader(url);
+         var reader = new YamlDBReader(mUrl);
          mFilterPrice = reader.GetPrice();
       }
 

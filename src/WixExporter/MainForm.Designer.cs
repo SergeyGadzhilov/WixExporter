@@ -42,34 +42,34 @@ namespace WixExporter
          this.button_Save = new System.Windows.Forms.Button();
          this.button_ExportSelected = new System.Windows.Forms.Button();
          this.button_ExportAll = new System.Windows.Forms.Button();
+         this.progressBar1 = new System.Windows.Forms.ProgressBar();
          ((System.ComponentModel.ISupportInitialize)(this.OffersGrid)).BeginInit();
          this.SuspendLayout();
          // 
          // label_Destination
          // 
          this.label_Destination.AutoSize = true;
-         this.label_Destination.Location = new System.Drawing.Point(10, 295);
-         this.label_Destination.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+         this.label_Destination.Location = new System.Drawing.Point(13, 363);
          this.label_Destination.Name = "label_Destination";
-         this.label_Destination.Size = new System.Drawing.Size(60, 13);
+         this.label_Destination.Size = new System.Drawing.Size(79, 17);
          this.label_Destination.TabIndex = 1;
          this.label_Destination.Text = "Destination";
          // 
          // textBox_Destination
          // 
-         this.textBox_Destination.Location = new System.Drawing.Point(74, 292);
-         this.textBox_Destination.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.textBox_Destination.Location = new System.Drawing.Point(99, 359);
+         this.textBox_Destination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.textBox_Destination.Name = "textBox_Destination";
-         this.textBox_Destination.Size = new System.Drawing.Size(514, 20);
+         this.textBox_Destination.Size = new System.Drawing.Size(684, 22);
          this.textBox_Destination.TabIndex = 3;
          this.textBox_Destination.TextChanged += new System.EventHandler(this.textBox_Destination_TextChanged);
          // 
          // button_LookupDestination
          // 
-         this.button_LookupDestination.Location = new System.Drawing.Point(592, 292);
-         this.button_LookupDestination.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.button_LookupDestination.Location = new System.Drawing.Point(789, 359);
+         this.button_LookupDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.button_LookupDestination.Name = "button_LookupDestination";
-         this.button_LookupDestination.Size = new System.Drawing.Size(30, 20);
+         this.button_LookupDestination.Size = new System.Drawing.Size(40, 25);
          this.button_LookupDestination.TabIndex = 5;
          this.button_LookupDestination.Text = "...";
          this.button_LookupDestination.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@ namespace WixExporter
          // 
          // button_Update
          // 
-         this.button_Update.Location = new System.Drawing.Point(299, 328);
-         this.button_Update.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.button_Update.Location = new System.Drawing.Point(399, 404);
+         this.button_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.button_Update.Name = "button_Update";
-         this.button_Update.Size = new System.Drawing.Size(56, 25);
+         this.button_Update.Size = new System.Drawing.Size(75, 31);
          this.button_Update.TabIndex = 6;
          this.button_Update.Text = "Update";
          this.button_Update.UseVisualStyleBackColor = true;
@@ -98,8 +98,8 @@ namespace WixExporter
             this.OldQuantity,
             this.NewPrice,
             this.NewQuantity});
-         this.OffersGrid.Location = new System.Drawing.Point(2, 1);
-         this.OffersGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.OffersGrid.Location = new System.Drawing.Point(3, 1);
+         this.OffersGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.OffersGrid.Name = "OffersGrid";
          this.OffersGrid.ReadOnly = true;
          this.OffersGrid.RowHeadersVisible = false;
@@ -107,7 +107,7 @@ namespace WixExporter
          this.OffersGrid.RowTemplate.Height = 24;
          this.OffersGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
          this.OffersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-         this.OffersGrid.Size = new System.Drawing.Size(629, 285);
+         this.OffersGrid.Size = new System.Drawing.Size(839, 351);
          this.OffersGrid.TabIndex = 7;
          // 
          // ID
@@ -153,10 +153,10 @@ namespace WixExporter
          // button_Save
          // 
          this.button_Save.Enabled = false;
-         this.button_Save.Location = new System.Drawing.Point(359, 328);
-         this.button_Save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.button_Save.Location = new System.Drawing.Point(479, 404);
+         this.button_Save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.button_Save.Name = "button_Save";
-         this.button_Save.Size = new System.Drawing.Size(56, 25);
+         this.button_Save.Size = new System.Drawing.Size(75, 31);
          this.button_Save.TabIndex = 8;
          this.button_Save.Text = "Save";
          this.button_Save.UseVisualStyleBackColor = true;
@@ -165,10 +165,10 @@ namespace WixExporter
          // button_ExportSelected
          // 
          this.button_ExportSelected.Enabled = false;
-         this.button_ExportSelected.Location = new System.Drawing.Point(420, 328);
-         this.button_ExportSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.button_ExportSelected.Location = new System.Drawing.Point(560, 404);
+         this.button_ExportSelected.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.button_ExportSelected.Name = "button_ExportSelected";
-         this.button_ExportSelected.Size = new System.Drawing.Size(99, 25);
+         this.button_ExportSelected.Size = new System.Drawing.Size(132, 31);
          this.button_ExportSelected.TabIndex = 9;
          this.button_ExportSelected.Text = "Export Selected";
          this.button_ExportSelected.UseVisualStyleBackColor = true;
@@ -177,21 +177,30 @@ namespace WixExporter
          // button_ExportAll
          // 
          this.button_ExportAll.Enabled = false;
-         this.button_ExportAll.Location = new System.Drawing.Point(525, 328);
-         this.button_ExportAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.button_ExportAll.Location = new System.Drawing.Point(700, 404);
+         this.button_ExportAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.button_ExportAll.Name = "button_ExportAll";
-         this.button_ExportAll.Size = new System.Drawing.Size(97, 25);
+         this.button_ExportAll.Size = new System.Drawing.Size(129, 31);
          this.button_ExportAll.TabIndex = 10;
          this.button_ExportAll.Text = "Export All";
          this.button_ExportAll.UseVisualStyleBackColor = true;
          this.button_ExportAll.Click += new System.EventHandler(this.button_ExportAll_Click);
          // 
+         // progressBar1
+         // 
+         this.progressBar1.Location = new System.Drawing.Point(203, 168);
+         this.progressBar1.Name = "progressBar1";
+         this.progressBar1.Size = new System.Drawing.Size(430, 23);
+         this.progressBar1.TabIndex = 11;
+         this.progressBar1.Visible = false;
+         // 
          // MainForm
          // 
-         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+         this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-         this.ClientSize = new System.Drawing.Size(633, 364);
+         this.ClientSize = new System.Drawing.Size(844, 448);
+         this.Controls.Add(this.progressBar1);
          this.Controls.Add(this.button_ExportAll);
          this.Controls.Add(this.button_ExportSelected);
          this.Controls.Add(this.button_Save);
@@ -200,7 +209,7 @@ namespace WixExporter
          this.Controls.Add(this.button_LookupDestination);
          this.Controls.Add(this.textBox_Destination);
          this.Controls.Add(this.label_Destination);
-         this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+         this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
          this.MaximizeBox = false;
          this.MinimizeBox = false;
          this.Name = "MainForm";
@@ -225,6 +234,7 @@ namespace WixExporter
       private System.Windows.Forms.DataGridViewTextBoxColumn OldQuantity;
       private System.Windows.Forms.DataGridViewTextBoxColumn NewPrice;
       private System.Windows.Forms.DataGridViewTextBoxColumn NewQuantity;
+      private System.Windows.Forms.ProgressBar progressBar1;
    }
 }
 

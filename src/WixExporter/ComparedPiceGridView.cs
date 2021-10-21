@@ -19,7 +19,7 @@ namespace WixExporter
 
       public void SetData(ComparedPrice price)
       {
-         mView.Rows.Clear();
+         Clear();
          foreach (var offer in price.comparedOffers())
          {
             object[] data = {
@@ -32,6 +32,12 @@ namespace WixExporter
 
             mView.Rows.Add(data);
          }
+      }
+
+      public void Clear()
+      {
+         mView.Rows.Clear();
+         mView.Refresh();
       }
 
       public List<string> GetSelected()
