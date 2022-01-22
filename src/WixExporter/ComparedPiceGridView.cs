@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,11 @@ namespace WixExporter
                offer.Value.Quantity
             };
 
-            mView.Rows.Add(data);
+            var index = mView.Rows.Add(data);
+            if (offer.Value.IsDeleted)
+            {
+               mView.Rows[index].DefaultCellStyle.BackColor = Color.Red;
+            }
          }
       }
 

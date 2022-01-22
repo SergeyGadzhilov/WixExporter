@@ -59,9 +59,21 @@ namespace WixExporter.core
                   var comparedOffer = new ComparedOffer(oldOffers[offer.Key], offer.Value);
                   comparedOffers.Add(offer.Key, comparedOffer);
                }
+               oldOffers.Remove(offer.Key);
             }
             else
             {
+               comparedOffers.Add(offer.Key, new ComparedOffer(offer.Value));
+            }
+         }
+
+         if (oldOffers.Count > 0)
+         {
+            foreach (var offer in oldOffers)
+            {
+               offer.Value.IsDeleted = true;
+               offer.Value.Price = "deleted";
+               offer.Value.Quantity = "deleted";
                comparedOffers.Add(offer.Key, new ComparedOffer(offer.Value));
             }
          }

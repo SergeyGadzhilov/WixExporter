@@ -124,8 +124,10 @@ namespace WixExporter
 
          foreach (var offerID in mTable.GetSelected())
          {
-            priceValidator.ValidateOffer(offers[offerID]);
-            price.AddOffer(offers[offerID]);
+            if (priceValidator.ValidateOffer(offers[offerID]))
+            {
+               price.AddOffer(offers[offerID]);
+            }
          }
 
          WixWritter writter = new WixWritter(price, new CsvFormatter());
@@ -145,8 +147,10 @@ namespace WixExporter
          PriceValidatorDialog priceValidator = new PriceValidatorDialog(mPrice.GetFilter());
          foreach (var offer in mPrice.comparedOffers())
          {
-            priceValidator.ValidateOffer(offer.Value);
-            price.AddOffer(offer.Value);
+            if (priceValidator.ValidateOffer(offer.Value))
+            {
+               price.AddOffer(offer.Value);
+            }
          }
 
          WixWritter writter = new WixWritter(price, new CsvFormatter());
