@@ -22,9 +22,13 @@ namespace WixExporter
          }
       }
 
-      public void ValidateOffer(Offer offer)
+      public bool ValidateOffer(Offer offer)
       {
-         ValidateOfferName(offer);
+         if (!offer.IsDeleted)
+         {
+            ValidateOfferName(offer);
+         }
+         return offer.IsDeleted;
       }
 
       private void ValidateOfferName(Offer offer)
