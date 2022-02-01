@@ -49,8 +49,9 @@ namespace WixExporter.db
          {
             mWriter.WriteStartElement("offer");
             mWriter.WriteAttributeString("id", offer.Key);
+            mWriter.WriteAttributeString("available", offer.Value.IsAvailable ? "true" : "false");
             mWriter.WriteAttributeString("instock", offer.Value.Quantity);
-
+            
             var offerData = offer.Value;
             mWriter.WriteElementString("price", offerData.Price);
             mWriter.WriteElementString("categoryId", offerData.Category.Id);

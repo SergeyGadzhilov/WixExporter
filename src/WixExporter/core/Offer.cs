@@ -20,6 +20,7 @@ namespace WixExporter.core
       private List<string> mPictures = new List<string>();
       private List<Param> mParams = new List<Param>();
       private bool isDeleted = false;
+      private bool isAvailable = true;
 
       public Offer()
       {
@@ -39,6 +40,7 @@ namespace WixExporter.core
          Pictures = offer.Pictures;
          Params = offer.Params;
          isDeleted = offer.isDeleted;
+         isAvailable = offer.isAvailable;
       }
 
       public string Id { get => mId; set => mId = value; }
@@ -53,6 +55,7 @@ namespace WixExporter.core
       public List<string> Pictures { get => mPictures; set => mPictures = value; }
       internal List<Param> Params { get => mParams; set => mParams = value; }
       public bool IsDeleted { get => isDeleted; set => isDeleted = value; }
+      public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
 
       public void AddPicuture(string path)
       {

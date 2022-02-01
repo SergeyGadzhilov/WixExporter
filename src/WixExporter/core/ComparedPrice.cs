@@ -44,6 +44,25 @@ namespace WixExporter.core
          return mFilter;
       }
 
+      private void addDeletedOffers(Dictionary<string, Offer> deletedOffers, Dictionary<string, ComparedOffer> destination)
+      {
+         if (deletedOffers.Count > 0)
+         {
+            foreach (var offer in deletedOffers)
+            {
+               if (destination.ContainsKey(offer.Key))
+               {
+                  destination[offer.Key].IsDeleted = true;
+               }
+               else
+               {
+                  offer.Value.IsDeleted = true;
+                  destination.Add(offer.Key, new ComparedOffer(offer.Value));
+               }
+            }
+         }
+      }
+
       public Dictionary<string, ComparedOffer> comparedOffers()
       {
          Dictionary<string, ComparedOffer> comparedOffers = new Dictionary<string, ComparedOffer>(offers().Count);
@@ -54,11 +73,13 @@ namespace WixExporter.core
             if (oldOffers.ContainsKey(offer.Key))
             {
                if (oldOffers[offer.Key].Price != offer.Value.Price ||
-                   oldOffers[offer.Key].Quantity != offer.Value.Quantity)
+                   oldOffers[offer.Key].Quantity != offer.Value.Quantity ||
+                   oldOffers[offer.Key].IsAvailable != offer.Value.IsAvailable)
                {
                   var comparedOffer = new ComparedOffer(oldOffers[offer.Key], offer.Value);
                   comparedOffers.Add(offer.Key, comparedOffer);
                }
+
                oldOffers.Remove(offer.Key);
             }
             else
@@ -67,16 +88,7 @@ namespace WixExporter.core
             }
          }
 
-         if (oldOffers.Count > 0)
-         {
-            foreach (var offer in oldOffers)
-            {
-               offer.Value.IsDeleted = true;
-               offer.Value.Price = "deleted";
-               offer.Value.Quantity = "deleted";
-               comparedOffers.Add(offer.Key, new ComparedOffer(offer.Value));
-            }
-         }
+         addDeletedOffers(oldOffers, comparedOffers);
 
          return comparedOffers;
       }
