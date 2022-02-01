@@ -62,6 +62,8 @@ namespace WixExporter.db
             offer.Quantity = GetValue(xmlNode.Attributes["instock"]);
             offer.Vendor = GetValue(xmlNode.SelectSingleNode("vendor"));
             offer.Description = GetValue(xmlNode.SelectSingleNode("description"));
+            offer.IsAvailable = (GetValue(xmlNode.Attributes["available"], "true") == "true");
+            offer.IsDeleted = (!offer.IsAvailable);
 
             foreach (XmlNode picture in xmlNode.SelectNodes("picture"))
             {
@@ -92,9 +94,9 @@ namespace WixExporter.db
          return category;
       }
 
-      private string GetValue(XmlAttribute attribute)
+      private string GetValue(XmlAttribute attribute, string defaultValue = "")
       {
-         string data = "";
+         string data = defaultValue;
 
          if (attribute != null)
          {
