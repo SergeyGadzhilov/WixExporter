@@ -24,11 +24,14 @@ namespace WixExporter
 
       public bool ValidateOffer(Offer offer)
       {
-         if (!offer.IsDeleted)
+         bool isValid = (!offer.IsDeleted);
+         
+         if (isValid)
          {
             ValidateOfferName(offer);
          }
-         return offer.IsDeleted;
+
+         return isValid;
       }
 
       private void ValidateOfferName(Offer offer)
